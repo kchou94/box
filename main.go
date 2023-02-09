@@ -11,11 +11,23 @@ func home(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello from box"))
 }
 
+// Add a view handler function.
+func view(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Display a specific box"))
+}
+
+// Add a create handler function.
+func create(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Create a new box..."))
+}
+
 func main() {
 	// Use the http.NewServeMux() function to initialize a new servemux, then
 	// egister the home function as the handler for the "/" URL pattern.
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", home)
+	mux.HandleFunc("/box/view", view)
+	mux.HandleFunc("/box/create", create)
 
 	// Use the http.ListenAndServe() function to start a new web server. We pass in
 	// two parameters: the TCP network address to listen on (in this case ":4000")
